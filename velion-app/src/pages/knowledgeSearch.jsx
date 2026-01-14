@@ -30,7 +30,7 @@ const KnowledgeSearch = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [filters, setFilters] = useState({
+    const [filters] = useState({
         documentType: [],
         qualityScore: [0, 100],
         dateRange: 'all',
@@ -45,16 +45,6 @@ const KnowledgeSearch = () => {
         total: 0,
         totalPages: 1
     });
-
-    const documentTypes = [
-        'PROPOSAL', 'REPORT', 'PRESENTATION', 'CONTRACT',
-        'RESEARCH', 'GUIDELINE', 'TEMPLATE', 'OTHER'
-    ];
-
-    const departments = [
-        'Consulting', 'Strategy', 'Research', 'Operations',
-        'Finance', 'Marketing', 'Technology', 'Human Resources'
-    ];
 
     const handleSearch = async (page = 1) => {
         if (!searchQuery.trim()) return;
@@ -84,13 +74,6 @@ const KnowledgeSearch = () => {
         if (e.key === 'Enter') {
             handleSearch();
         }
-    };
-
-    const handleFilterChange = (filterName, value) => {
-        setFilters(prev => ({
-            ...prev,
-            [filterName]: value
-        }));
     };
 
     const handleSortChange = (sortOption) => {

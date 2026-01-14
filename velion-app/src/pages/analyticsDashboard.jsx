@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Grid,
@@ -45,12 +45,7 @@ const AnalyticsDashboard = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  useEffect(() => {
-    fetchDashboardData();
-    fetchSkillGapAnalysis();
-  }, [fetchDashboardData, timeframe]);
-
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     setLoading(true);
     try {
       const response = await analyticsAPI.getDashboardData({ timeframe });
@@ -62,7 +57,12 @@ const AnalyticsDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeframe]);
+
+  useEffect(() => {
+    fetchDashboardData();
+    fetchSkillGapAnalysis();
+  }, [fetchDashboardData]);
 
   const fetchSkillGapAnalysis = async () => {
     try {
