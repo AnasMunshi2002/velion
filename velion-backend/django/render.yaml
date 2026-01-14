@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: velion-django-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py migrate
+    startCommand: gunicorn dkn.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DJANGO_SECRET_KEY
+        sync: false
+      - key: ALLOWED_HOSTS
+        value: velion-django.onrender.com
