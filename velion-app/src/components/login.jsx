@@ -12,7 +12,7 @@ import {
   Link,
   Grid
 } from '@mui/material';
-import { Lock as LockIcon } from '@mui/icons-material';
+import { Dashboard, Lock as LockIcon } from '@mui/icons-material';
 import { useAuth } from '../contexts/authContexts';
 
 const Login = () => {
@@ -26,7 +26,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/dashboard');
+    setLoading(true);
+    // Navigate immediately after a short delay to show button feedback
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 300);
   };
 
   return (
